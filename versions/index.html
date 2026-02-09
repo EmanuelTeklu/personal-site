@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Versions</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 0; background: #0f1115; color: #e8e8e8; }
+    header { padding: 32px 24px; border-bottom: 1px solid #222; background: #0b0d12; }
+    h1 { margin: 0 0 6px; font-size: 24px; }
+    p { margin: 0; color: #b9b9b9; }
+    main { padding: 24px; }
+    .card { background: #131620; border: 1px solid #202434; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+    .meta { color: #9aa3b2; font-size: 12px; }
+    a { color: #7db7ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Version Gallery</h1>
+    <p>All published versions for this site.</p>
+  </header>
+  <main id="list">Loading…</main>
+  <script>
+    async function load() {
+      const res = await fetch('/versions/index.json', { cache: 'no-store' });
+      const data = await res.json();
+      const list = document.getElementById('list');
+      list.innerHTML = '';
+      data.versions.forEach(v => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div><strong>${v.label}</strong></div>
+          <div class="meta">${v.date} • ${v.id}</div>
+          <div><a href="${v.url}">Open</a></div>
+          ${v.notes ? `<div class="meta">${v.notes}</div>` : ''}
+        `;
+        list.appendChild(card);
+      });
+    }
+    load();
+  </script>
+</body>
+</html>
