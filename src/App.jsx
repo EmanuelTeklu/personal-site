@@ -218,11 +218,10 @@ function Home({ onNav }) {
         backgroundImage: "url('/massawa.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center top",
-        opacity: 0.28,
-        maskImage: "linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 90%)",
-        WebkitMaskImage: "linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 90%)",
+        opacity: 0.38,
+        maskImage: "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.15) 80%, transparent 95%)",
+        WebkitMaskImage: "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.15) 80%, transparent 95%)",
         pointerEvents: "none",
-        filter: "grayscale(100%)",
       }} />
 
       {/* Subtle glow */}
