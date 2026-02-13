@@ -18,7 +18,7 @@ const MOVIES = [
     title: "Fantastic Mr. Fox",
     year: "2009",
     director: "Wes Anderson",
-    note: "The wild animal speech lives in my head rent-free.",
+    note: "The wild animal speech.",
     gradient: "linear-gradient(145deg, #c4751b 0%, #e8a833 40%, #f5d062 100%)",
     accent: "#3d2200",
     letterboxd: "https://letterboxd.com/film/fantastic-mr-fox/",
@@ -27,7 +27,7 @@ const MOVIES = [
     title: "Barry Lyndon",
     year: "1975",
     director: "Stanley Kubrick",
-    note: "Every frame is a painting. Not exaggerating.",
+    note: "Every frame, a painting.",
     gradient: "linear-gradient(145deg, #2a3040 0%, #4a5568 40%, #8b9bb5 100%)",
     accent: "#d4c5a0",
     letterboxd: "https://letterboxd.com/film/barry-lyndon/",
@@ -347,12 +347,12 @@ function Home({ onNav }) {
   );
 }
 
-function PageShell({ title, children }) {
+function PageShell({ title, children, maxWidth = "800px" }) {
   return (
     <div className="page-content" style={{
       minHeight: "100vh",
       padding: "120px max(40px, 8vw) 80px",
-      maxWidth: "800px",
+      maxWidth,
     }}>
       <h2 style={{
         fontFamily: "var(--serif)",
@@ -471,7 +471,7 @@ function MovieCard({ movie, index }) {
 
 function MoviesPage() {
   return (
-    <PageShell title="Movies">
+    <PageShell title="Movies" maxWidth="1000px">
       <p style={{
         fontFamily: "var(--sans)",
         fontSize: "0.88rem",
@@ -514,7 +514,7 @@ function MoviesPage() {
         display: "grid",
         gridTemplateColumns: "repeat(4, 1fr)",
         gap: "20px",
-        maxWidth: "760px",
+        maxWidth: "920px",
       }}>
         {MOVIES.map((m, i) => <MovieCard key={i} movie={m} index={i} />)}
       </div>
