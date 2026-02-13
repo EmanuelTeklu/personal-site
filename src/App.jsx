@@ -218,9 +218,9 @@ function Home({ onNav }) {
         backgroundImage: "url('/massawa.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center top",
-        opacity: 0.12,
-        maskImage: "linear-gradient(to left, rgba(0,0,0,0.6) 0%, transparent 85%)",
-        WebkitMaskImage: "linear-gradient(to left, rgba(0,0,0,0.6) 0%, transparent 85%)",
+        opacity: 0.28,
+        maskImage: "linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 90%)",
+        WebkitMaskImage: "linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 90%)",
         pointerEvents: "none",
         filter: "grayscale(100%)",
       }} />
