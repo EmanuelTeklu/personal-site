@@ -1,140 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Emanuel Teklu</title>
-<meta name="description" content="Building epistemic infrastructure for the AI era.">
-<meta property="og:title" content="Emanuel Teklu">
-<meta property="og:description" content="I build tools that help people think better — AI systems for calibration, coordination, and frontier reasoning.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://emanuelteklu.com">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Emanuel Teklu">
-<meta name="twitter:description" content="Building epistemic infrastructure for the AI era.">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-  :root { --accent: #C8A96E; --bg: #0A0A0A; --bg2: #111; --dim: #6B6B6B; }
-  body { background: var(--bg); color: #E0E0E0; font-family: 'Space Mono', monospace; }
-  .serif { font-family: 'Instrument Serif', serif; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes lineGrow { from { width: 0; } to { width: 100%; } }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-  .fade-up { animation: fadeUp 0.8s ease-out both; }
-  .fade-up-2 { animation: fadeUp 0.8s ease-out 0.15s both; }
-  .fade-up-3 { animation: fadeUp 0.8s ease-out 0.3s both; }
-  .fade-up-4 { animation: fadeUp 0.8s ease-out 0.45s both; }
-  .fade-up-5 { animation: fadeUp 0.8s ease-out 0.6s both; }
-  .line-grow { animation: lineGrow 1.2s ease-out 0.5s both; }
-  .live-dot { animation: pulse 2s ease-in-out infinite; }
-  a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
-  a:hover { opacity: 0.7; }
-  ::selection { background: var(--accent); color: var(--bg); }
-</style>
-</head>
-<body class="min-h-screen">
-<div class="max-w-2xl mx-auto px-6 py-16 md:py-24">
-
-  <!-- Name & Identity -->
-  <header class="fade-up mb-2">
-    <h1 class="serif text-5xl md:text-7xl italic tracking-tight text-white" style="line-height:1.05">Emanuel<br>Teklu</h1>
-  </header>
-
-  <!-- Accent line -->
-  <div class="h-px bg-gradient-to-r from-[#C8A96E] to-transparent line-grow mb-10"></div>
-
-  <!-- Title -->
-  <p class="fade-up-2 serif text-xl md:text-2xl italic text-white/90 mb-8" style="line-height:1.4">Building epistemic infrastructure for the AI&nbsp;era.</p>
-
-  <!-- One-liner -->
-  <p class="fade-up-3 text-sm leading-relaxed mb-12" style="color: #999; max-width: 520px;">I build tools that help people think better&thinsp;—&thinsp;AI systems for calibration, coordination, and frontier reasoning.</p>
-
-  <!-- Currently -->
-  <section class="fade-up-4 mb-14">
-    <div class="flex items-center gap-2 mb-4">
-      <span class="live-dot inline-block w-2 h-2 rounded-full" style="background: #C8A96E;"></span>
-      <span class="text-xs uppercase tracking-widest" style="color: var(--dim);">Currently</span>
-    </div>
-    <div class="space-y-2 text-sm" style="color: #BBB;">
-      <p>Program Director, <span class="text-white">ECSAC</span></p>
-      <p>Building <a href="https://janehive.com">JaneHive</a>&thinsp;—&thinsp;AI-native epistemic coordination</p>
-      <p>Year Up United at <span class="text-white">IronWatch Security</span></p>
-    </div>
-  </section>
-
-  <!-- Links / Projects -->
-  <section class="fade-up-5 mb-14">
-    <p class="text-xs uppercase tracking-widest mb-4" style="color: var(--dim);">Work</p>
-    <div class="grid grid-cols-2 gap-x-8 gap-y-3 text-sm">
-      <a href="https://janehive.com">JaneHive →</a>
-      <a href="https://github.com/EmanuelTeklu">GitHub →</a>
-      <a href="https://emanulteklu.github.io/epistemic-auditor">Epistemic Auditor →</a>
-      <a href="https://x.com/">X / Twitter →</a>
-    </div>
-  </section>
-
-  <!-- Interests & Influences — the memorable element: a quiet grid -->
-  <section class="mb-14 fade-up-5">
-    <div class="grid md:grid-cols-2 gap-10">
-      <div>
-        <p class="text-xs uppercase tracking-widest mb-3" style="color: var(--dim);">Interests</p>
-        <p class="text-sm leading-relaxed" style="color: #999;">Forecasting · Institutional design · AI orchestration · Ethiopian community development</p>
-      </div>
-      <div>
-        <p class="text-xs uppercase tracking-widest mb-3" style="color: var(--dim);">Influences</p>
-        <p class="text-sm leading-relaxed" style="color: #999;">Tyler Cowen · Philip Tetlock · Peter Thiel · Hayek</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Divider -->
-  <div class="h-px mb-14" style="background: #222;"></div>
-
-  <!-- Contact -->
-  <footer class="text-sm" style="color: var(--dim);">
-    <a href="mailto:tekluemanuel10@gmail.com" class="inline-flex items-center gap-2">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
-      tekluemanuel10@gmail.com
-    </a>
-    <p class="mt-8 text-xs" style="color: #333;">© 2026 Emanuel Teklu</p>
-  </footer>
-
-</div>
-
-<!-- Version banner -->
-<div id="version-banner" style="position: fixed; bottom: 14px; right: 14px; background: rgba(12,14,18,0.88); color: #fff; padding: 10px 12px; border-radius: 10px; font: 12px/1.3 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; z-index: 9999; box-shadow: 0 8px 30px rgba(0,0,0,0.35);">
-  <div style="font-weight: 600; margin-bottom: 4px;">Current version</div>
-  <div id="version-label">Loading…</div>
-  <div style="margin-top: 6px;"><a href="/versions/" style="color:#9cd2ff; text-decoration:none;">Browse all versions →</a></div>
-</div>
-<script>
-  fetch('/versions/index.json', { cache: 'no-store' })
-    .then(r => r.json())
-    .then(data => {
-      const current = data.versions[0];
-      const el = document.getElementById('version-label');
-      if (current && el) el.textContent = `${current.label} (${current.date})`;
-    })
-    .catch(() => {});
-</script>
-
-
-<section id="contact-panel" style="max-width:720px;margin:64px auto 96px;padding:24px;border:1px solid #1f2430;border-radius:16px;background:#0f121a;color:#e5e7eb;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;">
-  <h2 style="margin:0 0 8px;font-size:20px;">Contact</h2>
-  <p style="margin:0 0 16px;color:#9aa4b2;">Reach out and I’ll get back to you.</p>
-  <div id="supabase-status" style="font-size:12px;color:#7b8794;margin-bottom:12px;">Loading Supabase…</div>
-  <form id="contact-form" style="display:grid;gap:12px;">
-    <input name="name" placeholder="Your name" required style="padding:10px 12px;border-radius:8px;border:1px solid #2a3242;background:#0b0e14;color:#e5e7eb;" />
-    <input name="email" type="email" placeholder="Email" required style="padding:10px 12px;border-radius:8px;border:1px solid #2a3242;background:#0b0e14;color:#e5e7eb;" />
-    <textarea name="message" placeholder="Message" rows="4" required style="padding:10px 12px;border-radius:8px;border:1px solid #2a3242;background:#0b0e14;color:#e5e7eb;"></textarea>
-    <button type="submit" style="padding:10px 14px;border-radius:8px;border:0;background:#2f6fed;color:#fff;font-weight:600;cursor:pointer;">Send</button>
-    <div id="contact-ok" style="color:#7ee787;font-size:12px;"></div>
-    <div id="contact-error" style="color:#f87171;font-size:12px;"></div>
-  </form>
-</section>
-<script src="/supabase-config.js"></script>
-<script src="/contact.js"></script>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emanuel Teklu</title>
+    <meta name="description" content="Emanuel Teklu — personal site." />
+    <meta property="og:title" content="Emanuel Teklu" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://emanuelteklu.com" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

@@ -17,3 +17,6 @@ Thumbs.db
 
 # Dependencies
 node_modules/
+
+# Build
+dist/
