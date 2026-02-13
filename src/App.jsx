@@ -451,17 +451,6 @@ function MovieCard({ movie, index }) {
           }}>
             {movie.title}
           </h3>
-          <p style={{
-            fontFamily: "var(--sans)",
-            fontSize: "0.72rem",
-            fontWeight: 300,
-            color: "rgba(255,255,255,0.65)",
-            lineHeight: 1.55,
-            opacity: hovered ? 1 : 0.7,
-            transition: "opacity 0.3s ease",
-          }}>
-            {movie.note}
-          </p>
         </div>
       </div>
     </a>
@@ -480,34 +469,8 @@ function MoviesPage() {
         marginBottom: "12px",
         maxWidth: "560px",
       }}>
-        Top four, plus a couple I keep coming back to.
+        Letterboxd top four.
       </p>
-      <a
-        href="https://letterboxd.com"
-        target="_blank"
-        rel="noopener"
-        style={{
-          fontFamily: "var(--mono)",
-          fontSize: "0.68rem",
-          color: "var(--fg-muted)",
-          letterSpacing: "0.06em",
-          display: "inline-block",
-          marginBottom: "40px",
-          borderBottom: "1px solid transparent",
-          paddingBottom: "1px",
-          transition: "all 0.2s ease",
-        }}
-        onMouseEnter={e => {
-          e.target.style.color = "var(--accent)";
-          e.target.style.borderBottomColor = "var(--accent)";
-        }}
-        onMouseLeave={e => {
-          e.target.style.color = "var(--fg-muted)";
-          e.target.style.borderBottomColor = "transparent";
-        }}
-      >
-        letterboxd ↗
-      </a>
 
       <div style={{
         display: "grid",
@@ -678,13 +641,12 @@ function AboutPage() {
         maxWidth: "560px",
       }}>
         <p className="fade-up" style={{ marginBottom: "20px", animationDelay: "0.05s" }}>
-          I'm Emanuel. I'm interested in AI — not the discourse around it, just what happens
-          when machines get good at things we assumed only people could do.
+          Curious about A.I. economics in Africa.
         </p>
         <p className="fade-up" style={{ marginBottom: "20px", animationDelay: "0.1s" }}>
           I'm building something called{" "}
-          <a href="https://janehive.com" target="_blank" rel="noopener" style={{ color: "var(--accent)" }}>JaneHive</a>.
-          Still figuring it out.
+          <a href="https://janehive.com" target="_blank" rel="noopener" style={{ color: "var(--accent)" }}>JaneHive</a>,
+          vibe coding for the equilibria.
         </p>
         <p className="fade-up" style={{ marginBottom: "32px", animationDelay: "0.15s" }}>
           Washington, DC.
