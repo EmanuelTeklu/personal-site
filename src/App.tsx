@@ -15,6 +15,7 @@ import { MetaAnalysis } from "@/pages/private/MetaAnalysis";
 import { Tokens } from "@/pages/private/Tokens";
 import { Overnight } from "@/pages/private/Overnight";
 import { Research } from "@/pages/private/Research";
+import { AICommand } from "@/pages/private/AICommand";
 import { Placeholder } from "@/pages/private/Placeholder";
 import { NotFound } from "@/pages/NotFound";
 
@@ -59,15 +60,7 @@ export function App() {
             <Route path="/tokens" element={<Tokens />} />
             <Route path="/overnight" element={<Overnight />} />
             <Route path="/research" element={<Research />} />
-            <Route
-              path="/ai"
-              element={
-                <Placeholder
-                  title="AI Command"
-                  description="Chat interface for ClawdBot — send prompts, see streaming responses."
-                />
-              }
-            />
+            <Route path="/ai" element={<AICommand />} />
             <Route
               path="/settings"
               element={
