@@ -1,12 +1,28 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { PUBLIC_NAV_ITEMS, EMAIL } from "@/lib/constants";
 
 export function Home() {
   const [mounted, setMounted] = useState(false);
+  const navigate = useNavigate();
+  const clickTimestamps = useRef<readonly number[]>([]);
+
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const handleNameClick = useCallback(() => {
+    const now = Date.now();
+    const recent = [...clickTimestamps.current, now].filter(
+      (t) => now - t < 800,
+    );
+    clickTimestamps.current = recent;
+
+    if (recent.length >= 3) {
+      clickTimestamps.current = [];
+      navigate("/login");
+    }
+  }, [navigate]);
 
   return (
     <div
@@ -60,6 +76,7 @@ export function Home() {
       <div style={{ maxWidth: "720px", position: "relative", zIndex: 1 }}>
         <h1
           className={mounted ? "fade-up" : ""}
+          onClick={handleNameClick}
           style={{
             fontFamily: "var(--serif)",
             fontSize: "clamp(3rem, 7vw, 5.5rem)",
@@ -68,6 +85,8 @@ export function Home() {
             letterSpacing: "-0.02em",
             color: "var(--fg)",
             marginBottom: "32px",
+            cursor: "default",
+            userSelect: "none",
           }}
         >
           Emanuel

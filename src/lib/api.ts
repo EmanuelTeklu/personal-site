@@ -1,10 +1,18 @@
 /**
  * FastAPI fetch wrapper — adds JWT from Supabase session.
+ *
+ * The FastAPI sidecar runs locally (localhost:8000) and reads local files
+ * (PM2 status, git logs, token-usage.json). In production on Vercel, the
+ * sidecar is unreachable — hooks that depend on it will get a clear error
+ * so the UI can show a "connect locally" message instead of crashing.
  */
 
 import { supabase } from "./supabase";
 
 const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+
+/** True when deployed to Vercel (no local sidecar available). */
+export const IS_PRODUCTION = import.meta.env.PROD && !import.meta.env.VITE_API_URL;
 
 async function getAuthHeader(): Promise<Record<string, string>> {
   if (!supabase) return {};
@@ -15,9 +23,14 @@ async function getAuthHeader(): Promise<Record<string, string>> {
 }
 
 export async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
+  if (IS_PRODUCTION) {
+    throw new Error("Local API — connect from localhost to use this feature.");
+  }
+
   const auth = await getAuthHeader();
   const res = await fetch(`${API_BASE}${path}`, {
     ...options,
+    signal: options?.signal ?? AbortSignal.timeout(5000),
     headers: {
       "Content-Type": "application/json",
       ...auth,

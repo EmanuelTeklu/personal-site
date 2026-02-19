@@ -1,9 +1,29 @@
-import { Link, useLocation } from "react-router-dom";
+import { useRef, useCallback } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PUBLIC_NAV_ITEMS } from "@/lib/constants";
 
 export function PublicNav() {
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === "/";
+  const clickTimestamps = useRef<readonly number[]>([]);
+
+  const handleLogoClick = useCallback(
+    (e: React.MouseEvent) => {
+      const now = Date.now();
+      const recent = [...clickTimestamps.current, now].filter(
+        (t) => now - t < 800,
+      );
+      clickTimestamps.current = recent;
+
+      if (recent.length >= 3) {
+        e.preventDefault();
+        clickTimestamps.current = [];
+        navigate("/login");
+      }
+    },
+    [navigate],
+  );
 
   if (isHome) return null;
 
@@ -12,29 +32,25 @@ export function PublicNav() {
       className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between pointer-events-none"
       style={{
         padding: "24px 40px",
-        background:
-          "linear-gradient(to bottom, var(--bg) 60%, transparent)",
+        background: "linear-gradient(to bottom, var(--bg) 60%, transparent)",
       }}
     >
       <Link
         to="/"
+        onClick={handleLogoClick}
         className="pointer-events-auto border-none cursor-pointer"
         style={{
           fontFamily: "var(--serif)",
           fontSize: "1.1rem",
           fontWeight: 400,
           fontStyle: "italic",
-          color:
-            location.pathname === "/"
-              ? "var(--accent)"
-              : "var(--fg-dim)",
+          color: location.pathname === "/" ? "var(--accent)" : "var(--fg-dim)",
           letterSpacing: "0.02em",
           textDecoration: "none",
           transition: "color 0.2s ease",
+          userSelect: "none",
         }}
-        onMouseEnter={(e) =>
-          (e.currentTarget.style.color = "var(--accent)")
-        }
+        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
         onMouseLeave={(e) => {
           if (location.pathname !== "/")
             e.currentTarget.style.color = "var(--fg-dim)";
