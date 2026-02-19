@@ -10,6 +10,12 @@ import type { TaskStatus } from "@/types/task";
 
 type View = "tasks" | "context" | "stream";
 
+function tabClass(active: boolean): string {
+  return active
+    ? "px-4 py-1.5 rounded text-sm font-medium transition-colors bg-zinc-800 text-zinc-100"
+    : "px-4 py-1.5 rounded text-sm font-medium transition-colors text-zinc-500 hover:text-zinc-300";
+}
+
 export function CommandCenter() {
   const { tasks, addTask, cycleStatus, removeTask } = useTasks();
   const { entries, addEntry, toggleResolved, removeEntry, compileContext } =
@@ -28,36 +34,9 @@ export function CommandCenter() {
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">Command Center</h1>
         <div className="flex gap-1 bg-zinc-900 border border-zinc-800 rounded-lg p-1">
-          <button
-            onClick={() => setView("tasks")}
-            className={`px-4 py-1.5 rounded text-sm font-medium transition-colors ${
-              view === "tasks"
-                ? "bg-zinc-800 text-zinc-100"
-                : "text-zinc-500 hover:text-zinc-300"
-            }`}
-          >
-            Tasks
-          </button>
-          <button
-            onClick={() => setView("context")}
-            className={`px-4 py-1.5 rounded text-sm font-medium transition-colors ${
-              view === "context"
-                ? "bg-zinc-800 text-zinc-100"
-                : "text-zinc-500 hover:text-zinc-300"
-            }`}
-          >
-            Context
-          </button>
-          <button
-            onClick={() => setView("stream")}
-            className={`px-4 py-1.5 rounded text-sm font-medium transition-colors ${
-              view === "stream"
-                ? "bg-zinc-800 text-zinc-100"
-                : "text-zinc-500 hover:text-zinc-300"
-            }`}
-          >
-            Stream
-          </button>
+          <button onClick={() => setView("tasks")} className={tabClass(view === "tasks")}>Tasks</button>
+          <button onClick={() => setView("context")} className={tabClass(view === "context")}>Context</button>
+          <button onClick={() => setView("stream")} className={tabClass(view === "stream")}>Stream</button>
         </div>
       </div>
 

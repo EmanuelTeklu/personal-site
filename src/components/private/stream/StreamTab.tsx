@@ -4,14 +4,17 @@ import { useStreamEntries } from "@/hooks/useStreamEntries";
 import { StreamCompose } from "@/components/private/stream/StreamCompose";
 
 function formatCommitDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
+  try {
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return "—";
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  } catch {
+    return "—";
+  }
 }
 
 export function StreamTab() {
-  const { data, isLoading } = useSignals();
+  const { data, isLoading, error } = useSignals();
   const { addEntry } = useStreamEntries();
   const [seed, setSeed] = useState<string>("");
 
@@ -35,6 +38,12 @@ export function StreamTab() {
 
         {isLoading && (
           <p className="font-mono text-xs text-zinc-500">loading signals...</p>
+        )}
+
+        {error && (
+          <p className="font-mono text-xs text-red-400">
+            Failed to load signals.
+          </p>
         )}
 
         {commits.map((commit) => (
