@@ -14,7 +14,7 @@ interface StreamEvent {
   readonly name?: string;
 }
 
-const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 async function getAuthHeader(): Promise<Record<string, string>> {
   if (!supabase) return {};
