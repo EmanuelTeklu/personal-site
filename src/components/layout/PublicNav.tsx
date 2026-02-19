@@ -1,12 +1,14 @@
 import { useRef, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PUBLIC_NAV_ITEMS } from "@/lib/constants";
+import { useAuth } from "@/hooks/useAuth";
 
 export function PublicNav() {
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === "/";
   const clickTimestamps = useRef<readonly number[]>([]);
+  const { user } = useAuth();
 
   const handleLogoClick = useCallback(
     (e: React.MouseEvent) => {
@@ -58,7 +60,7 @@ export function PublicNav() {
       >
         et
       </Link>
-      <div className="flex gap-8 pointer-events-auto">
+      <div className="flex items-center gap-8 pointer-events-auto">
         {PUBLIC_NAV_ITEMS.map((item) => (
           <Link
             key={item.path}
@@ -88,6 +90,39 @@ export function PublicNav() {
             {item.label}
           </Link>
         ))}
+        <Link
+          to={user ? "/cc" : "/login"}
+          title="Command Center"
+          aria-label="Command Center"
+          style={{
+            color: "var(--fg-muted)",
+            transition: "color 0.2s ease",
+            display: "flex",
+            alignItems: "center",
+            marginLeft: "8px",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.color = "var(--fg-muted)")
+          }
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+          </svg>
+        </Link>
       </div>
     </nav>
   );

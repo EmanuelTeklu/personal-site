@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { PageShell } from "@/components/ui/PageShell";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
@@ -79,6 +80,29 @@ export function About() {
                 {l.label}
               </a>
             ))}
+            <Link
+              to="/login"
+              style={{
+                fontFamily: "var(--mono)",
+                fontSize: "0.72rem",
+                color: "var(--fg-muted)",
+                letterSpacing: "0.06em",
+                borderBottom: "1px solid transparent",
+                paddingBottom: "2px",
+                transition: "all 0.2s ease",
+                textDecoration: "none",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "var(--accent)";
+                e.currentTarget.style.borderBottomColor = "var(--accent)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--fg-muted)";
+                e.currentTarget.style.borderBottomColor = "transparent";
+              }}
+            >
+              command center
+            </Link>
           </div>
         </div>
       </div>

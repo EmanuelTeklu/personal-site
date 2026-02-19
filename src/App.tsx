@@ -12,6 +12,7 @@ import { About } from "@/pages/public/About";
 import { Stream } from "@/pages/public/Stream";
 import { Login } from "@/pages/Login";
 import { CommandCenter } from "@/pages/private/CommandCenter";
+import { CommandCenterV2 } from "@/pages/private/CommandCenterV2";
 import { MetaAnalysis } from "@/pages/private/MetaAnalysis";
 import { Tokens } from "@/pages/private/Tokens";
 import { Overnight } from "@/pages/private/Overnight";
@@ -57,7 +58,8 @@ export function App() {
               </AuthGate>
             }
           >
-            <Route path="/cc" element={<CommandCenter />} />
+            <Route path="/cc" element={<CommandCenterV2 />} />
+            <Route path="/cc/legacy" element={<CommandCenter />} />
             <Route path="/cc/meta" element={<MetaAnalysis />} />
             <Route path="/tokens" element={<Tokens />} />
             <Route path="/overnight" element={<Overnight />} />

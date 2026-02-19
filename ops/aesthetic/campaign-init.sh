@@ -49,7 +49,7 @@ mkdir -p "$AESTHETIC_DIR"/{state,briefs,references,variants,verdicts}
 echo "Analyzing target component: $TARGET"
 
 # Extract export function name
-EXPORT_NAME=$(grep -oP 'export function \K\w+' "$PROJECT_DIR/$TARGET" | head -1)
+EXPORT_NAME=$(grep -o 'export function [A-Za-z_][A-Za-z0-9_]*' "$PROJECT_DIR/$TARGET" | head -1 | sed 's/export function //')
 if [[ -z "$EXPORT_NAME" ]]; then
   echo "WARNING: Could not detect export function name from $TARGET"
   EXPORT_NAME="Unknown"
@@ -65,7 +65,7 @@ else
 fi
 
 # Read CSS vars from index.css
-CSS_VARS=$(grep -oP 'var\(--[^)]+\)' "$PROJECT_DIR/src/index.css" | sort -u | sed 's/var(//;s/)//' | python3 -c "import sys,json; print(json.dumps([l.strip() for l in sys.stdin]))")
+CSS_VARS=$(grep -o 'var(--[^)]*)' "$PROJECT_DIR/src/index.css" | sort -u | sed 's/var(//;s/)//' | python3 -c "import sys,json; print(json.dumps([l.strip() for l in sys.stdin]))")
 
 echo "Detected: export=$EXPORT_NAME, style=$STYLE_MECHANISM"
 

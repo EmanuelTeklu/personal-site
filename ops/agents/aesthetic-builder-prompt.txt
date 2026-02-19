@@ -59,6 +59,21 @@ Update .aesthetic/state/current-cycle.json:
 - Set phase to "variants-ready"
 - Write atomically (write to .tmp then rename)
 
+## Dual Theme System
+This project has two themes:
+- Public pages use `:root` CSS vars (--bg, --fg, --accent, etc.)
+- Private pages use `.theme-hive` CSS vars (--hive-bg, --hive-fg, --hive-green-deep, etc.)
+
+When the campaign target is in `src/components/private/` or `src/pages/private/`:
+- style_mechanism will be "tailwind"
+- Use `var(--hive-*)` tokens via Tailwind arbitrary value syntax: `bg-[var(--hive-bg)]`
+- NEVER use the public `:root` vars (--bg, --fg, --accent)
+- NEVER use zinc, violet, or dark mode Tailwind classes
+
+When the campaign target is in `src/pages/public/` or `src/components/public/`:
+- style_mechanism will be "inline-only"
+- Use `:root` vars (--bg, --fg, --accent, etc.)
+
 ## Rules
 - NEVER modify src/ permanently — only temporary swaps for verification, always restore
 - NEVER touch files outside .aesthetic/ and the target component (temp only)

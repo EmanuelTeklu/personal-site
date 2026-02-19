@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PUBLIC_NAV_ITEMS, EMAIL } from "@/lib/constants";
+import { useAuth } from "@/hooks/useAuth";
 
 export function Home() {
   const [mounted, setMounted] = useState(false);
   const navigate = useNavigate();
+  const { user } = useAuth();
   const clickTimestamps = useRef<readonly number[]>([]);
 
   useEffect(() => {
@@ -170,6 +172,38 @@ export function Home() {
               {item.label}
             </Link>
           ))}
+          <Link
+            to={user ? "/cc" : "/login"}
+            className={mounted ? "fade-up" : ""}
+            style={{
+              animationDelay: `${0.5 + PUBLIC_NAV_ITEMS.length * 0.06}s`,
+              background: "none",
+              border: "1px solid var(--fg-muted)",
+              borderRadius: "0",
+              padding: "10px 20px",
+              cursor: "pointer",
+              fontFamily: "var(--mono)",
+              fontSize: "0.72rem",
+              fontWeight: 300,
+              letterSpacing: "0.1em",
+              textTransform: "lowercase",
+              color: "var(--fg-dim)",
+              transition: "all 0.25s ease",
+              textDecoration: "none",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "var(--accent)";
+              e.currentTarget.style.color = "var(--accent)";
+              e.currentTarget.style.background = "var(--accent-dim)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "var(--fg-muted)";
+              e.currentTarget.style.color = "var(--fg-dim)";
+              e.currentTarget.style.background = "none";
+            }}
+          >
+            cc
+          </Link>
         </div>
       </div>
 
@@ -178,15 +212,33 @@ export function Home() {
           position: "absolute",
           bottom: "32px",
           left: "max(40px, 8vw)",
+          right: "max(40px, 8vw)",
           fontFamily: "var(--mono)",
           fontSize: "0.68rem",
           color: "var(--fg-muted)",
           letterSpacing: "0.05em",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <a href={`mailto:${EMAIL}`} style={{ color: "var(--fg-muted)" }}>
           {EMAIL}
         </a>
+        <Link
+          to="/login"
+          style={{
+            color: "var(--fg-muted)",
+            textDecoration: "none",
+            transition: "color 0.2s ease",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.color = "var(--fg-muted)")
+          }
+        >
+          command center
+        </Link>
       </div>
     </div>
   );
