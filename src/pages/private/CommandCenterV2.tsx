@@ -44,18 +44,18 @@ const VALID_VIEWS: readonly View[] = [
 ];
 
 const LOOP_STEPS = [
-  { id: "express", title: "Express", subtitle: "voice, text, reactions", glyph: "◇", tone: "bg-[var(--hive-green-deep)] text-white" },
-  { id: "interpret", title: "Interpret", subtitle: "maps your intent", glyph: "▢", tone: "bg-[var(--hive-accent-dim)] text-[var(--hive-green-deep)]" },
-  { id: "produce", title: "Produce", subtitle: "variants + code", glyph: "◈", tone: "bg-[var(--hive-status-idle)] text-[var(--hive-green-mid)]" },
-  { id: "judge", title: "Judge", subtitle: "critic + you", glyph: "⬡", tone: "bg-[var(--hive-bg-soft)] text-[var(--hive-fg-dim)]" },
+  { id: "express", title: "Capture", subtitle: "intent in plain language", glyph: "◇", tone: "bg-[var(--hive-green-deep)] text-white" },
+  { id: "interpret", title: "Frame", subtitle: "convert feedback into constraints", glyph: "▢", tone: "bg-[var(--hive-accent-dim)] text-[var(--hive-green-deep)]" },
+  { id: "produce", title: "Build", subtitle: "generate variants and code", glyph: "◈", tone: "bg-[var(--hive-status-idle)] text-[var(--hive-green-mid)]" },
+  { id: "judge", title: "Decide", subtitle: "pick winner, store memory", glyph: "⬡", tone: "bg-[var(--hive-bg-soft)] text-[var(--hive-fg-dim)]" },
 ] as const;
 
 const INPUT_MODES = [
-  { icon: Mic, label: "Voice", description: "streamed feedback", active: true },
-  { icon: Type, label: "Text", description: "specific constraints", active: true },
-  { icon: SmilePlus, label: "Reactions", description: "quick quality signal", active: true },
-  { icon: Image, label: "References", description: "visual target injection", active: true },
-  { icon: GitCompare, label: "Comparison", description: "A over B grounding", active: true },
+  { icon: Mic, label: "Voice", description: "quick spoken direction", active: true },
+  { icon: Type, label: "Text", description: "precise implementation notes", active: true },
+  { icon: SmilePlus, label: "Reactions", description: "fast pass or fail", active: true },
+  { icon: Image, label: "References", description: "screenshot-based alignment", active: true },
+  { icon: GitCompare, label: "Compare", description: "A vs B review", active: true },
 ] as const;
 
 interface ProductionVariant {
@@ -92,53 +92,53 @@ interface PreferenceCategory {
 
 const PRODUCTION_CYCLES: readonly ProductionCycle[] = [
   {
-    id: "c-18",
-    prompt: "rebalance dashboard around campaign operations",
-    interpretation: "campaign lane is primary, context split is secondary, signal density reduced",
+    id: "c-24",
+    prompt: "refresh /cc language so it feels current and intentional",
+    interpretation: "replace placeholder copy with concrete product and execution language",
     status: "deployed",
-    time: "2h ago",
+    time: "35m ago",
     variants: [
       {
         id: "A",
-        label: "Vertical campaign focus",
-        changes: ["Primary lane expanded", "Bottom row balanced", "Token rhythm simplified"],
+        label: "Concise modern copy",
+        changes: ["Updated headings", "Real project names", "Sharper status language"],
         reaction: "winner",
       },
       {
         id: "B",
-        label: "Compact dense layout",
-        changes: ["Reduced whitespace", "Smaller numerals", "Higher card density"],
+        label: "Verbose explanatory copy",
+        changes: ["Long descriptions", "Extra helper text", "Lower scan speed"],
         reaction: "negative",
       },
       {
         id: "C",
-        label: "Typography-forward",
-        changes: ["Lighter stat weights", "Muted metadata", "Lower visual noise"],
+        label: "Ops-heavy copy",
+        changes: ["More lane markers", "More metric callouts", "Stronger technical tone"],
         reaction: "positive",
       },
     ],
     learned: [
-      "presence means scale, not heavy shadows",
-      "generic drift appears when cards become too uniform",
+      "you prefer direct copy over decorative labels",
+      "project cards must describe actual current work",
     ],
   },
   {
-    id: "c-17",
-    prompt: "close the taste feedback loop in production",
-    interpretation: "Slack reactions feed cycle memory and update the next constraint pack",
+    id: "c-23",
+    prompt: "match figma framing while preserving your route structure",
+    interpretation: "retain shell + tabs, modernize content model and review flow",
     status: "judging",
-    time: "5h ago",
+    time: "2h ago",
     variants: [
       {
         id: "A",
-        label: "Slack thread gate",
-        changes: ["emoji scoring", "thread comment capture", "cycle JSON export"],
+        label: "Figma-near framing",
+        changes: ["Left rail cleanup", "Section hierarchy update", "Token polish"],
         reaction: "positive",
       },
       {
         id: "B",
-        label: "local markdown gate",
-        changes: ["manual edits", "no webhook", "delayed profile update"],
+        label: "Legacy framing",
+        changes: ["Older labels", "dated cards", "lower visual clarity"],
       },
     ],
   },
@@ -146,72 +146,72 @@ const PRODUCTION_CYCLES: readonly ProductionCycle[] = [
 
 const VOCAB_TERMS: readonly TasteTerm[] = [
   {
+    term: "dated",
+    meaning: "copy reads like placeholder demo text",
+    implies: ["replace generic nouns", "use current project language", "shorten sentences"],
+    confidence: 0.95,
+    usageCount: 19,
+  },
+  {
     term: "operational",
-    meaning: "serious, practical, no ornamental noise",
-    implies: ["data-first", "tight hierarchy", "clear lanes"],
-    confidence: 0.94,
+    meaning: "clear, useful, and immediately scannable",
+    implies: ["state current status", "state next action", "state owner"],
+    confidence: 0.93,
     usageCount: 27,
   },
   {
     term: "generic drift",
-    meaning: "looks like default AI dashboard output",
-    implies: ["template grid", "blue/purple drift", "status-dot overload"],
+    meaning: "looks like default template output",
+    implies: ["avoid filler buzzwords", "avoid anonymous card text"],
     confidence: 0.96,
-    usageCount: 32,
+    usageCount: 34,
   },
   {
     term: "presence",
-    meaning: "importance through scale and placement",
-    implies: ["lighter large numerals", "priority by area"],
-    confidence: 0.82,
-    usageCount: 11,
-  },
-  {
-    term: "breathing room",
-    meaning: "reduced density, stronger separation",
-    implies: ["larger gutters", "fewer competing surfaces"],
-    confidence: 0.89,
-    usageCount: 13,
+    meaning: "importance through scale and spacing",
+    implies: ["larger light numerals", "strong section breaks"],
+    confidence: 0.86,
+    usageCount: 14,
   },
 ];
 
 const PREFERENCES: readonly PreferenceCategory[] = [
   {
+    category: "Copy Style",
+    positive: ["direct", "specific", "decision-ready"],
+    negative: ["filler", "vague claims", "marketing speak"],
+    confidence: 0.94,
+  },
+  {
     category: "Palette",
-    positive: ["forest green", "cream surfaces", "warm neutrals"],
-    negative: ["purple accents", "cold blue CTA", "dark zinc shell"],
+    positive: ["forest green", "cream surfaces", "neutral text"],
+    negative: ["purple/blue drift", "slate-heavy dark shell"],
     confidence: 0.95,
   },
   {
-    category: "Typography",
-    positive: ["light numerals", "restrained mono metadata", "clear scale contrast"],
-    negative: ["bold-everywhere", "tiny dense labels"],
-    confidence: 0.9,
-  },
-  {
     category: "Structure",
-    positive: ["vertical campaign cards", "core loop framing", "clear secondary context"],
-    negative: ["flat card wall", "unbalanced columns", "decorative widgets"],
+    positive: ["vertical project stack", "clear top-to-bottom hierarchy", "balanced secondary panels"],
+    negative: ["flat card wall", "equal weight everywhere", "status-dot overload"],
     confidence: 0.91,
   },
 ];
 
 const INTERACTION_PATTERNS = [
   {
-    trigger: 'When you say "this feels generic"',
-    response: "critic runs anti-pattern audit and blocks drift motifs",
+    trigger: "When you say \"this feels dated\"",
+    response: "critic flags stale copy and asks for concrete replacement language",
   },
   {
-    trigger: "When you react 🔥 to a variant",
-    response: "architect updates preference profile with positive weighted rule",
+    trigger: "When you react 🔥",
+    response: "architect stores that pattern as a reusable preference rule",
   },
   {
     trigger: "When you react 💀 or ❌",
-    response: "builder receives hard negative rule next cycle",
+    response: "builder removes the motif in the next cycle, not later",
   },
   {
-    trigger: 'When you say "more like X"',
-    response: "scout extracts structural behavior from reference and maps constraints",
+    trigger: "When you say \"keep layout, fix content\"",
+    response: "builder does a copy-first pass before visual changes",
   },
 ] as const;
 
@@ -274,7 +274,7 @@ export function CommandCenterV2() {
   if (view === "dashboard") {
     return (
       <div className="space-y-8">
-        <SectionHeading title="Dashboard" subtitle="taste-to-production" />
+        <SectionHeading title="Dashboard" subtitle="live studio operations" />
 
         <HiveStatsRow stats={HIVE_STATS.slice(0, 4)} />
 
@@ -284,7 +284,7 @@ export function CommandCenterV2() {
               <h2 className="text-[18px] tracking-tight text-[var(--hive-fg-strong)]" style={{ fontWeight: 400 }}>
                 Core Loop
               </h2>
-              <p className="text-[13px] text-[var(--hive-fg-muted)]">express → interpret → produce → judge</p>
+              <p className="text-[13px] text-[var(--hive-fg-muted)]">capture → frame → build → decide</p>
             </div>
             <span className="flex items-center gap-1 text-[12px] text-[var(--hive-green-mid)]">
               <Activity size={14} /> Live
@@ -318,7 +318,7 @@ export function CommandCenterV2() {
           <div className="mt-4 flex items-center justify-between rounded-[var(--hive-radius-sm)] bg-[var(--hive-bg-soft)] px-4 py-3 text-[12px] text-[var(--hive-fg-dim)]">
             <span className="flex items-center gap-2">
               <Zap size={14} className="text-[var(--hive-green-mid)]" />
-              feedback accumulates each cycle
+              feedback memory updates every cycle
             </span>
             <div className="flex items-end gap-1">
               {[6, 8, 11, 9, 13, 12, 10, 14, 12, 15].map((height, i) => (
@@ -335,7 +335,7 @@ export function CommandCenterV2() {
                 Recent Cycles
               </h3>
               <span className="flex items-center gap-1 text-[12px] text-[var(--hive-green-mid)]">
-                View all <ChevronRight size={13} />
+                Open timeline <ChevronRight size={13} />
               </span>
             </div>
             <div className="space-y-3">
@@ -388,7 +388,7 @@ export function CommandCenterV2() {
   if (view === "taste-engine") {
     return (
       <div className="space-y-8">
-        <SectionHeading title="Taste Engine" subtitle="vocabulary and preference profile" />
+        <SectionHeading title="Taste Engine" subtitle="language and judgment memory" />
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
           {[
@@ -528,7 +528,7 @@ export function CommandCenterV2() {
   if (view === "projects" && selectedProject) {
     return (
       <div className="space-y-8">
-        <SectionHeading title="Projects" subtitle="project contexts" />
+        <SectionHeading title="Projects" subtitle="active workstreams" />
 
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
           <section className="space-y-3">
@@ -630,17 +630,17 @@ export function CommandCenterV2() {
   if (view === "production" && selectedCycle) {
     return (
       <div className="space-y-8">
-        <SectionHeading title="Production" subtitle="active cycles" />
+        <SectionHeading title="Production" subtitle="variant pipeline" />
 
         <section className="rounded-[var(--hive-radius-lg)] border border-[var(--hive-card-border)] bg-[var(--hive-card-bg)] p-5">
           <div className="flex flex-wrap items-center gap-3">
             <input
               type="text"
-              placeholder="Express your direction..."
+              placeholder="Describe the change you want to ship..."
               className="min-w-[260px] flex-1 rounded-[var(--hive-radius-sm)] border border-[var(--hive-card-border)] bg-[var(--hive-bg-soft)] px-4 py-3 text-sm text-[var(--hive-fg)] outline-none"
             />
             <button className="rounded-[var(--hive-radius-sm)] bg-[var(--hive-green-deep)] px-4 py-3 text-[12px] text-white">
-              Run cycle
+              Generate variants
             </button>
           </div>
         </section>
@@ -709,7 +709,7 @@ export function CommandCenterV2() {
             {selectedCycle.learned && selectedCycle.learned.length > 0 && (
               <article className="rounded-[var(--hive-radius-lg)] border border-[var(--hive-card-border)] bg-[var(--hive-card-bg)] p-5">
                 <div className="flex items-center gap-2 text-[13px] text-[var(--hive-green-mid)]">
-                  <Sparkles size={14} /> Learned this cycle
+                  <Sparkles size={14} /> Cycle takeaways
                 </div>
                 <div className="mt-3 space-y-2">
                   {selectedCycle.learned.map((lesson) => (
@@ -729,7 +729,7 @@ export function CommandCenterV2() {
   if (view === "history") {
     return (
       <div className="space-y-8">
-        <SectionHeading title="History" subtitle="interaction timeline" />
+        <SectionHeading title="History" subtitle="feedback and decisions" />
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
           {[
@@ -754,7 +754,7 @@ export function CommandCenterV2() {
               type="text"
               value={historyQuery}
               onChange={(event) => setHistoryQuery(event.target.value)}
-              placeholder="search interactions"
+              placeholder="search events, decisions, or owners"
               className="w-full rounded-[var(--hive-radius-sm)] border border-[var(--hive-card-border)] bg-[var(--hive-bg-soft)] py-2 pl-9 pr-3 text-sm text-[var(--hive-fg)] outline-none"
             />
           </div>
@@ -782,7 +782,7 @@ export function CommandCenterV2() {
   if (view === "settings") {
     return (
       <div className="space-y-8">
-        <SectionHeading title="Settings" subtitle="system configuration" />
+        <SectionHeading title="Settings" subtitle="workflow controls" />
 
         <section className="rounded-[var(--hive-radius-lg)] border border-[var(--hive-card-border)] bg-[var(--hive-card-bg)] p-6">
           <div className="flex items-center gap-2">
@@ -846,7 +846,7 @@ export function CommandCenterV2() {
       <div className="flex items-center gap-2">
         <Palette size={16} className="text-[var(--hive-green-mid)]" />
         <h2 className="text-[16px] text-[var(--hive-fg-strong)]" style={{ fontWeight: 500 }}>
-          Task Execution
+          Task Queue
         </h2>
       </div>
 

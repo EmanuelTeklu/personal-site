@@ -15,9 +15,9 @@ import { useAuth } from "@/hooks/useAuth";
 
 const NAV_ITEMS = [
   { href: "/cc", view: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/cc?view=taste-engine", view: "taste-engine", label: "Taste Engine", icon: Palette },
+  { href: "/cc?view=taste-engine", view: "taste-engine", label: "Insights", icon: Palette },
   { href: "/cc?view=projects", view: "projects", label: "Projects", icon: FolderKanban },
-  { href: "/cc?view=production", view: "production", label: "Production", icon: Rocket },
+  { href: "/cc?view=production", view: "production", label: "Runs", icon: Rocket },
   { href: "/cc?view=history", view: "history", label: "History", icon: Clock },
 ] as const;
 
@@ -68,9 +68,9 @@ export function PrivateSidebar() {
           </span>
           <div>
             <p className="text-[15px] tracking-tight text-[var(--hive-fg-strong)]" style={{ fontWeight: 500 }}>
-              Emanuel Studio
+              Emanuel.com
             </p>
-            <p className="text-[11px] uppercase tracking-[0.16em] text-[var(--hive-fg-muted)]">Command System</p>
+            <p className="text-[11px] uppercase tracking-[0.16em] text-[var(--hive-fg-muted)]">Operator Console</p>
           </div>
         </Link>
       </div>
@@ -92,7 +92,7 @@ export function PrivateSidebar() {
 
         <div className="rounded-[var(--hive-radius-sm)] border border-[var(--hive-card-border)] bg-[var(--hive-bg-soft)] px-3 py-2 text-[11px] text-[var(--hive-fg-dim)]">
           <p className="font-[var(--mono)] uppercase tracking-[0.12em] text-[var(--hive-fg-muted)]">System</p>
-          <p className="pt-1">Learning active, profile updating.</p>
+          <p className="pt-1">Live memory and review sync active.</p>
         </div>
 
         <button
