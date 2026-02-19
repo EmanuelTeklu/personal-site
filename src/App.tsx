@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthContext, useAuthState } from "@/hooks/useAuth";
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { PrivateLayout } from "@/components/layout/PrivateLayout";
@@ -11,87 +12,77 @@ import { About } from "@/pages/public/About";
 import { Login } from "@/pages/Login";
 import { CommandCenter } from "@/pages/private/CommandCenter";
 import { MetaAnalysis } from "@/pages/private/MetaAnalysis";
+import { Tokens } from "@/pages/private/Tokens";
+import { Overnight } from "@/pages/private/Overnight";
+import { Research } from "@/pages/private/Research";
 import { Placeholder } from "@/pages/private/Placeholder";
 import { NotFound } from "@/pages/NotFound";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 30_000,
+      retry: 1,
+    },
+  },
+});
 
 export function App() {
   const auth = useAuthState();
 
   return (
-    <AuthContext.Provider value={auth}>
-      <Routes>
-        {/* Public routes */}
-        <Route element={<PublicLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/writing" element={<Writing />} />
-          <Route path="/links" element={<Links />} />
-          <Route path="/about" element={<About />} />
-        </Route>
+    <QueryClientProvider client={queryClient}>
+      <AuthContext.Provider value={auth}>
+        <Routes>
+          {/* Public routes */}
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/writing" element={<Writing />} />
+            <Route path="/links" element={<Links />} />
+            <Route path="/about" element={<About />} />
+          </Route>
 
-        {/* Login (standalone — no layout) */}
-        <Route path="/login" element={<Login />} />
+          {/* Login (standalone — no layout) */}
+          <Route path="/login" element={<Login />} />
 
-        {/* Private routes */}
-        <Route
-          element={
-            <AuthGate>
-              <PrivateLayout />
-            </AuthGate>
-          }
-        >
-          <Route path="/cc" element={<CommandCenter />} />
-          <Route path="/cc/meta" element={<MetaAnalysis />} />
+          {/* Private routes */}
           <Route
-            path="/ai"
             element={
-              <Placeholder
-                title="AI Command"
-                description="Chat interface for ClawdBot — send prompts, see streaming responses."
-              />
+              <AuthGate>
+                <PrivateLayout />
+              </AuthGate>
             }
-          />
-          <Route
-            path="/overnight"
-            element={
-              <Placeholder
-                title="Overnight"
-                description="Task queue and overnight run results from ClawdBot."
-              />
-            }
-          />
-          <Route
-            path="/tokens"
-            element={
-              <Placeholder
-                title="Tokens"
-                description="API spend visualization — daily, weekly, per-source breakdown."
-              />
-            }
-          />
-          <Route
-            path="/research"
-            element={
-              <Placeholder
-                title="Research"
-                description="Browse overnight research briefs and analysis."
-              />
-            }
-          />
-          <Route
-            path="/settings"
-            element={
-              <Placeholder
-                title="Settings"
-                description="Preferences, theme, and configuration."
-              />
-            }
-          />
-        </Route>
+          >
+            <Route path="/cc" element={<CommandCenter />} />
+            <Route path="/cc/meta" element={<MetaAnalysis />} />
+            <Route path="/tokens" element={<Tokens />} />
+            <Route path="/overnight" element={<Overnight />} />
+            <Route path="/research" element={<Research />} />
+            <Route
+              path="/ai"
+              element={
+                <Placeholder
+                  title="AI Command"
+                  description="Chat interface for ClawdBot — send prompts, see streaming responses."
+                />
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <Placeholder
+                  title="Settings"
+                  description="Preferences, theme, and configuration."
+                />
+              }
+            />
+          </Route>
 
-        {/* Catch-all */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </AuthContext.Provider>
+          {/* Catch-all */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AuthContext.Provider>
+    </QueryClientProvider>
   );
 }
