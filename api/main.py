@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.routers import health, tokens, overnight, research, agent
+from api.routers import health, tokens, overnight, research, agent, signals
 
 app = FastAPI(title="emanuelteklu-api", version="0.1.0")
 
@@ -24,3 +24,4 @@ app.include_router(tokens.router, prefix="/api")
 app.include_router(overnight.router, prefix="/api")
 app.include_router(research.router, prefix="/api")
 app.include_router(agent.router, prefix="/api")
+app.include_router(signals.router, prefix="/api")
