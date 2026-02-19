@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -15,34 +15,35 @@
 }
 
 .theme-hive {
-  --hive-bg: #f5f7f5;
-  --hive-bg-soft: #eef3ee;
+  --hive-bg: #fafaf7;
+  --hive-bg-soft: #f0ede6;
   --hive-fg: #1a1a1a;
-  --hive-fg-strong: #101512;
-  --hive-fg-dim: #6b7280;
-  --hive-fg-muted: #9ca3af;
+  --hive-fg-strong: #161716;
+  --hive-fg-dim: #5f6368;
+  --hive-fg-muted: #8a8f97;
   --hive-green-deep: #1a3a2a;
-  --hive-green-mid: #166534;
-  --hive-green-bright: #4ade80;
-  --hive-green-light: #bbf7d0;
+  --hive-green-mid: #2d6a4f;
+  --hive-green-bright: #52b788;
+  --hive-green-light: #d8f3dc;
   --hive-card-bg: #ffffff;
-  --hive-card-border: #e5e7eb;
-  --hive-card-border-strong: #d7dfd7;
-  --hive-sidebar-bg: #ffffff;
-  --hive-sidebar-border: #f0f0f0;
-  --hive-accent: #4ade80;
-  --hive-accent-dim: rgba(74, 222, 128, 0.15);
-  --hive-line: #d9e2d9;
-  --hive-surface-muted: #edf2ee;
+  --hive-card-border: rgba(0, 0, 0, 0.08);
+  --hive-card-border-strong: rgba(0, 0, 0, 0.12);
+  --hive-sidebar-bg: #fafaf7;
+  --hive-sidebar-border: rgba(0, 0, 0, 0.06);
+  --hive-accent: #2d6a4f;
+  --hive-accent-dim: #e8f5e9;
+  --hive-line: #dce5dc;
+  --hive-surface-muted: #f5f3ee;
   --hive-grid-tint: rgba(255, 255, 255, 0.16);
-  --hive-spark-bg: rgba(26, 58, 42, 0.07);
-  --hive-status-live: rgba(74, 222, 128, 0.22);
-  --hive-status-idle: rgba(26, 58, 42, 0.08);
-  --hive-status-offline: rgba(26, 58, 42, 0.2);
-  --hive-radius-lg: 16px;
+  --hive-spark-bg: rgba(45, 106, 79, 0.08);
+  --hive-status-live: rgba(82, 183, 136, 0.22);
+  --hive-status-idle: rgba(45, 106, 79, 0.1);
+  --hive-status-offline: rgba(26, 58, 42, 0.16);
+  --hive-radius-lg: 14px;
   --hive-radius-sm: 10px;
   --hive-gap-sm: 8px;
   --hive-gap-md: 16px;
+  font-family: "Inter", "DM Sans", system-ui, sans-serif;
 }
 
 * {
