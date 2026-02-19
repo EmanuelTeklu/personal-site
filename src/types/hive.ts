@@ -18,6 +18,8 @@ export interface HiveStat {
   readonly accent?: boolean;
   readonly trendLabel: string;
   readonly context: string;
+  readonly deltaPercent: number;
+  readonly window: string;
   readonly sparkline: readonly HiveSparkPoint[];
 }
 
@@ -43,6 +45,7 @@ export interface HiveCampaign {
   readonly name: string;
   readonly objective: string;
   readonly status: HiveCampaignStatus;
+  readonly priority: "P1" | "P2" | "P3";
   readonly phase: CampaignPhase;
   readonly progress: number;
   readonly apiCost: number;
@@ -50,6 +53,8 @@ export interface HiveCampaign {
   readonly tokens: number;
   readonly linesWritten: number;
   readonly tasks: readonly HiveTask[];
+  readonly focus: string;
+  readonly nextAction: string;
   readonly started: string | null;
   readonly owner: string;
   readonly staffCell: ActivityLane;
@@ -64,6 +69,7 @@ export interface HiveActivityEntry {
   readonly type: ActivityType;
   readonly source: string;
   readonly msg: string;
+  readonly stage: "observe" | "decide" | "execute" | "verify";
   readonly lane: ActivityLane;
   readonly severity: ActivitySeverity;
   readonly glyph: string;
