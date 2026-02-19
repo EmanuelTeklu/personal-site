@@ -32,7 +32,7 @@ tmux send-keys -t "$SESSION:3.1" "cd $PROJECT_DIR && python3 -m uvicorn api.main
 
 # Window 4: watchdog
 tmux new-window -t "$SESSION" -n "watchdog"
-tmux send-keys -t "$SESSION:4" "$PROJECT_DIR/ops/watchdog.sh" Enter
+tmux send-keys -t "$SESSION:4" "bash $PROJECT_DIR/ops/watchdog.sh" Enter
 
 # Select window 0 and attach
 tmux select-window -t "$SESSION:0"
