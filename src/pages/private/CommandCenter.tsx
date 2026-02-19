@@ -6,9 +6,10 @@ import { TaskForm } from "@/components/private/tasks/TaskForm";
 import { TaskList } from "@/components/private/tasks/TaskList";
 import { ContextPanel } from "@/components/private/context/ContextPanel";
 import { StreamTab } from "@/components/private/stream/StreamTab";
+import { CampaignManager } from "@/components/private/campaigns/CampaignManager";
 import type { TaskStatus } from "@/types/task";
 
-type View = "tasks" | "context" | "stream";
+type View = "tasks" | "context" | "stream" | "campaigns";
 
 function tabClass(active: boolean): string {
   return active
@@ -34,9 +35,30 @@ export function CommandCenter() {
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">Command Center</h1>
         <div className="flex gap-1 bg-zinc-900 border border-zinc-800 rounded-lg p-1">
-          <button onClick={() => setView("tasks")} className={tabClass(view === "tasks")}>Tasks</button>
-          <button onClick={() => setView("context")} className={tabClass(view === "context")}>Context</button>
-          <button onClick={() => setView("stream")} className={tabClass(view === "stream")}>Stream</button>
+          <button
+            onClick={() => setView("tasks")}
+            className={tabClass(view === "tasks")}
+          >
+            Tasks
+          </button>
+          <button
+            onClick={() => setView("context")}
+            className={tabClass(view === "context")}
+          >
+            Context
+          </button>
+          <button
+            onClick={() => setView("stream")}
+            className={tabClass(view === "stream")}
+          >
+            Stream
+          </button>
+          <button
+            onClick={() => setView("campaigns")}
+            className={tabClass(view === "campaigns")}
+          >
+            Campaigns
+          </button>
         </div>
       </div>
 
@@ -68,6 +90,7 @@ export function CommandCenter() {
         />
       )}
       {view === "stream" && <StreamTab />}
+      {view === "campaigns" && <CampaignManager />}
     </div>
   );
 }
