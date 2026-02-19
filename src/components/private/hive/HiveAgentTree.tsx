@@ -90,28 +90,18 @@ function buildTree(agents: readonly HiveAgent[]): readonly TreeNode[] {
   return resolve(null);
 }
 
-function AgentBranch({
-  node,
-}: {
-  readonly node: TreeNode;
-}) {
+function AgentBranch({ node }: { readonly node: TreeNode }) {
   return (
     <li className="space-y-2">
-      <div className="rounded-xl border border-[var(--hive-card-border)] bg-[var(--hive-card-bg)] px-3 py-2.5">
+      <div className="rounded-[var(--hive-radius-sm)] border border-[var(--hive-card-border)] bg-[var(--hive-card-bg)] px-3 py-2.5">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-sm text-[var(--hive-green-deep)]">{node.agent.icon}</span>
           <p className="text-sm font-medium text-[var(--hive-fg)]">{node.agent.name}</p>
           <span className="text-xs text-[var(--hive-fg-muted)]">{node.agent.role}</span>
-          <span
-            className="ml-auto rounded-full border px-2 py-0.5 text-[10px] font-[var(--mono)] tracking-[0.1em]"
-            style={TIER_STYLE[node.agent.tier]}
-          >
+          <span className="ml-auto rounded-full border px-2 py-0.5 text-[10px] font-[var(--mono)] tracking-[0.1em]" style={TIER_STYLE[node.agent.tier]}>
             {TIER_LABEL[node.agent.tier]}
           </span>
-          <span
-            className="rounded-full border px-2 py-0.5 text-[10px] font-[var(--mono)] tracking-[0.1em]"
-            style={STATUS_STYLE[node.agent.status]}
-          >
+          <span className="rounded-full border px-2 py-0.5 text-[10px] font-[var(--mono)] tracking-[0.1em]" style={STATUS_STYLE[node.agent.status]}>
             {STATUS_LABEL[node.agent.status]}
           </span>
         </div>
@@ -130,12 +120,18 @@ function AgentBranch({
 
 export function HiveAgentTree({ agents }: HiveAgentTreeProps) {
   const tree = buildTree(agents);
+  const active = agents.filter((agent) => agent.status === "active").length;
 
   return (
-    <section className="rounded-2xl border border-[var(--hive-card-border)] bg-[var(--hive-card-bg)] p-4">
+    <section className="rounded-[var(--hive-radius-lg)] border border-[var(--hive-card-border)] bg-[var(--hive-card-bg)] p-4">
       <header className="mb-3 border-b border-[var(--hive-card-border)] pb-2">
-        <h3 className="text-sm font-medium text-[var(--hive-fg)]">Agent Hierarchy</h3>
-        <p className="text-[11px] font-[var(--mono)] uppercase tracking-[0.15em] text-[var(--hive-fg-muted)]">
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="text-sm font-medium text-[var(--hive-fg)]">Agent Hierarchy</h3>
+          <span className="text-[10px] font-[var(--mono)] uppercase tracking-[0.12em] text-[var(--hive-fg-dim)]">
+            {active}/{agents.length} active
+          </span>
+        </div>
+        <p className="text-[10px] font-[var(--mono)] uppercase tracking-[0.15em] text-[var(--hive-fg-muted)]">
           command chain schematic
         </p>
       </header>

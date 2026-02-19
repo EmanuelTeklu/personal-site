@@ -37,9 +37,9 @@ const STATUS_STYLE: Record<HiveCampaignStatus, CSSProperties> = {
 };
 
 const RISK_LABEL: Record<HiveCampaign["risk"], string> = {
-  low: "LOW RISK",
+  low: "LOW",
   watch: "WATCH",
-  high: "HIGH RISK",
+  high: "HIGH",
 };
 
 const RISK_STYLE: Record<HiveCampaign["risk"], CSSProperties> = {
@@ -98,7 +98,7 @@ export function HiveCampaignCard({ campaign }: HiveCampaignCardProps) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <article className="rounded-2xl border border-[var(--hive-card-border)] bg-[var(--hive-card-bg)]">
+    <article className="rounded-[var(--hive-radius-lg)] border border-[var(--hive-card-border)] bg-[var(--hive-card-bg)]">
       <button
         onClick={() => setExpanded((previous) => !previous)}
         className="w-full p-5 text-left"
@@ -112,40 +112,32 @@ export function HiveCampaignCard({ campaign }: HiveCampaignCardProps) {
           <div className="min-w-0 flex-1 space-y-4">
             <header className="space-y-2">
               <div className="flex flex-wrap items-center gap-2">
-                <h3 className="text-[1.05rem] font-medium text-[var(--hive-fg-strong)]">
-                  {campaign.name}
-                </h3>
-                <span
-                  className="rounded-full border px-2.5 py-0.5 text-[10px] font-[var(--mono)] tracking-[0.12em]"
-                  style={STATUS_STYLE[campaign.status]}
-                >
+                <h3 className="text-[1.02rem] font-medium text-[var(--hive-fg-strong)]">{campaign.name}</h3>
+                <span className="rounded-full border px-2 py-0.5 text-[10px] font-[var(--mono)] tracking-[0.12em]" style={STATUS_STYLE[campaign.status]}>
                   {STATUS_LABEL[campaign.status]}
                 </span>
-                <span className="rounded-full border border-[var(--hive-card-border)] bg-[var(--hive-bg-soft)] px-2.5 py-0.5 text-[10px] font-[var(--mono)] tracking-[0.12em] text-[var(--hive-fg-dim)]">
-                  {campaign.staffCell}
+                <span className="rounded-full border border-[var(--hive-card-border)] bg-[var(--hive-bg-soft)] px-2 py-0.5 text-[10px] font-[var(--mono)] tracking-[0.12em] text-[var(--hive-fg-dim)]">
+                  {campaign.priority}
                 </span>
-                <span
-                  className="rounded-full border px-2.5 py-0.5 text-[10px] font-[var(--mono)] tracking-[0.12em]"
-                  style={RISK_STYLE[campaign.risk]}
-                >
+                <span className="rounded-full border px-2 py-0.5 text-[10px] font-[var(--mono)] tracking-[0.12em]" style={RISK_STYLE[campaign.risk]}>
                   {RISK_LABEL[campaign.risk]}
                 </span>
               </div>
               <p className="text-sm leading-relaxed text-[var(--hive-fg-dim)]">{campaign.objective}</p>
             </header>
 
-            <section className="grid grid-cols-2 gap-x-5 gap-y-3 border-y border-[var(--hive-card-border)] py-3 text-xs sm:grid-cols-4">
+            <section className="grid grid-cols-2 gap-x-5 gap-y-3 border-y border-[var(--hive-card-border)] py-3 text-xs md:grid-cols-4">
               <div>
                 <p className="font-[var(--mono)] uppercase tracking-[0.12em] text-[var(--hive-fg-muted)]">Phase</p>
                 <p className="pt-1 font-medium text-[var(--hive-fg)]">{campaign.phase}</p>
               </div>
               <div>
-                <p className="font-[var(--mono)] uppercase tracking-[0.12em] text-[var(--hive-fg-muted)]">Owner</p>
-                <p className="pt-1 font-medium text-[var(--hive-fg)]">{campaign.owner}</p>
+                <p className="font-[var(--mono)] uppercase tracking-[0.12em] text-[var(--hive-fg-muted)]">Focus</p>
+                <p className="pt-1 font-medium text-[var(--hive-fg)]">{campaign.focus}</p>
               </div>
               <div>
-                <p className="font-[var(--mono)] uppercase tracking-[0.12em] text-[var(--hive-fg-muted)]">Swarms</p>
-                <p className="pt-1 font-medium text-[var(--hive-fg)]">{campaign.swarmCount}</p>
+                <p className="font-[var(--mono)] uppercase tracking-[0.12em] text-[var(--hive-fg-muted)]">Owner</p>
+                <p className="pt-1 font-medium text-[var(--hive-fg)]">{campaign.owner}</p>
               </div>
               <div>
                 <p className="font-[var(--mono)] uppercase tracking-[0.12em] text-[var(--hive-fg-muted)]">ETA</p>
@@ -159,16 +151,18 @@ export function HiveCampaignCard({ campaign }: HiveCampaignCardProps) {
                 <span className="text-[var(--hive-fg-dim)]">{campaign.progress}%</span>
               </div>
               <div className="h-1.5 overflow-hidden rounded-full bg-[var(--hive-surface-muted)]">
-                <div
-                  className="h-full rounded-full bg-[var(--hive-green-mid)]"
-                  style={{ width: `${campaign.progress}%` }}
-                />
+                <div className="h-full rounded-full bg-[var(--hive-green-mid)]" style={{ width: `${campaign.progress}%` }} />
               </div>
-              <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-[var(--mono)] text-[var(--hive-fg-dim)]">
+              <div className="grid grid-cols-1 gap-1 text-xs font-[var(--mono)] text-[var(--hive-fg-dim)] sm:grid-cols-3">
                 <span>{formatCost(campaign.apiCost)} / {formatCost(campaign.budget)}</span>
                 <span>{formatTokens(campaign.tokens)} TOK</span>
                 <span>{campaign.linesWritten.toLocaleString()} LOC</span>
               </div>
+            </section>
+
+            <section className="rounded-[var(--hive-radius-sm)] border border-[var(--hive-card-border)] bg-[var(--hive-bg-soft)] px-3 py-2">
+              <p className="text-[10px] font-[var(--mono)] uppercase tracking-[0.12em] text-[var(--hive-fg-muted)]">Next action</p>
+              <p className="pt-1 text-sm text-[var(--hive-fg)]">{campaign.nextAction}</p>
             </section>
           </div>
         </div>
@@ -181,29 +175,18 @@ export function HiveCampaignCard({ campaign }: HiveCampaignCardProps) {
           ) : (
             <div className="space-y-2.5">
               {campaign.tasks.map((task) => (
-                <div
-                  key={task.name}
-                  className="rounded-xl border border-[var(--hive-card-border)] bg-[var(--hive-card-bg)] px-3 py-2.5"
-                >
+                <div key={task.name} className="rounded-[var(--hive-radius-sm)] border border-[var(--hive-card-border)] bg-[var(--hive-card-bg)] px-3 py-2.5">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div className="min-w-0">
                       <p className="truncate text-sm font-medium text-[var(--hive-fg)]">{task.name}</p>
-                      <p className="text-[11px] font-[var(--mono)] uppercase tracking-[0.12em] text-[var(--hive-fg-muted)]">
-                        {task.cell} lane
-                      </p>
+                      <p className="text-[10px] font-[var(--mono)] uppercase tracking-[0.12em] text-[var(--hive-fg-muted)]">{task.cell} lane</p>
                     </div>
-                    <span
-                      className="rounded-full border px-2 py-0.5 text-[10px] font-[var(--mono)] tracking-[0.1em]"
-                      style={TASK_STATUS_STYLE[task.status]}
-                    >
+                    <span className="rounded-full border px-2 py-0.5 text-[10px] font-[var(--mono)] tracking-[0.1em]" style={TASK_STATUS_STYLE[task.status]}>
                       {TASK_STATUS_LABEL[task.status]}
                     </span>
                   </div>
                   <div className="mt-2 h-1 overflow-hidden rounded-full bg-[var(--hive-surface-muted)]">
-                    <div
-                      className="h-full rounded-full bg-[var(--hive-green-mid)]"
-                      style={{ width: `${task.progress}%` }}
-                    />
+                    <div className="h-full rounded-full bg-[var(--hive-green-mid)]" style={{ width: `${task.progress}%` }} />
                   </div>
                 </div>
               ))}

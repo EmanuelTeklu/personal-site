@@ -39,6 +39,10 @@
   --hive-status-live: rgba(74, 222, 128, 0.22);
   --hive-status-idle: rgba(26, 58, 42, 0.08);
   --hive-status-offline: rgba(26, 58, 42, 0.2);
+  --hive-radius-lg: 16px;
+  --hive-radius-sm: 10px;
+  --hive-gap-sm: 8px;
+  --hive-gap-md: 16px;
 }
 
 * {
@@ -71,6 +75,7 @@ a {
   text-decoration: none;
   transition: color 0.2s ease;
 }
+
 a:hover {
   color: var(--accent);
 }
