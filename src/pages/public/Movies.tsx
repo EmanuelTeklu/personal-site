@@ -19,27 +19,11 @@ export function Movies() {
         Letterboxd top four.
       </p>
 
-      <div
-        className="movie-grid"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "20px",
-          maxWidth: "920px",
-        }}
-      >
+      <div style={{ maxWidth: "600px" }}>
         {MOVIES.map((m, i) => (
           <MovieCard key={m.title} movie={m} index={i} />
         ))}
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .movie-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-      `}</style>
 
       <div style={{ marginTop: "56px" }}>
         <h3

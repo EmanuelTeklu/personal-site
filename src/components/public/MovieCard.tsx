@@ -16,92 +16,78 @@ export function MovieCard({ movie, index }: MovieCardProps) {
       rel="noopener noreferrer"
       className="fade-up"
       style={{
-        animationDelay: `${0.1 + index * 0.12}s`,
-        display: "block",
+        animationDelay: `${0.1 + index * 0.08}s`,
+        display: "flex",
+        alignItems: "center",
+        gap: "18px",
+        padding: "16px 0",
+        borderBottom: "1px solid rgba(255,255,255,0.04)",
         textDecoration: "none",
-        position: "relative",
-        borderRadius: "2px",
-        overflow: "hidden",
-        cursor: "pointer",
-        transition:
-          "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease",
-        transform: hovered ? "translateY(-4px)" : "translateY(0)",
-        boxShadow: hovered
-          ? "0 20px 60px rgba(0,0,0,0.4)"
-          : "0 4px 20px rgba(0,0,0,0.2)",
+        transition: "opacity 0.2s ease",
+        opacity: hovered ? 1 : 0.85,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <div
         style={{
-          aspectRatio: "2/3",
+          width: "4px",
+          height: "48px",
+          borderRadius: "2px",
           background: movie.gradient,
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          padding: "24px",
-          overflow: "hidden",
+          flexShrink: 0,
+        }}
+      />
+      <span
+        style={{
+          fontFamily: "var(--mono)",
+          fontSize: "0.65rem",
+          color: "var(--fg-muted)",
+          width: "16px",
+          flexShrink: 0,
         }}
       >
-        {/* Large index number */}
-        <span
+        {index + 1}
+      </span>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <h3
           style={{
-            position: "absolute",
-            top: "16px",
-            right: "20px",
             fontFamily: "var(--serif)",
-            fontSize: "6rem",
-            fontWeight: 300,
-            color: "rgba(255,255,255,0.06)",
-            lineHeight: 1,
-            pointerEvents: "none",
+            fontSize: "1.05rem",
+            fontWeight: 400,
+            color: "var(--fg)",
+            marginBottom: "3px",
+            lineHeight: 1.2,
           }}
         >
-          {index + 1}
-        </span>
-
-        {/* Gradient overlay */}
-        <div
+          {movie.title}
+        </h3>
+        <p
           style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)",
-            pointerEvents: "none",
+            fontFamily: "var(--sans)",
+            fontSize: "0.78rem",
+            color: "var(--fg-dim)",
+            fontWeight: 300,
+            fontStyle: "italic",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
           }}
-        />
-
-        {/* Content */}
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <span
-            style={{
-              fontFamily: "var(--mono)",
-              fontSize: "0.62rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: movie.accent,
-              display: "block",
-              marginBottom: "6px",
-            }}
-          >
-            {movie.director} · {movie.year}
-          </span>
-          <h3
-            style={{
-              fontFamily: "var(--serif)",
-              fontSize: "1.35rem",
-              fontWeight: 400,
-              color: "#fff",
-              lineHeight: 1.2,
-              marginBottom: "8px",
-            }}
-          >
-            {movie.title}
-          </h3>
-        </div>
+        >
+          {hovered ? movie.note : `${movie.director} · ${movie.year}`}
+        </p>
       </div>
+      <span
+        style={{
+          fontFamily: "var(--mono)",
+          fontSize: "0.65rem",
+          color: hovered ? movie.accent : "var(--fg-muted)",
+          transition: "color 0.2s ease",
+          flexShrink: 0,
+        }}
+      >
+        ↗
+      </span>
     </a>
   );
 }
