@@ -1,9 +1,10 @@
+"use client";
+
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { PrivateSidebar } from "./PrivateSidebar";
 
-export function PrivateLayout() {
+export function PrivateLayout({ children }: { readonly children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -42,7 +43,7 @@ export function PrivateLayout() {
         </div>
 
         <div className="mx-auto w-full max-w-[1440px] p-6 lg:p-8">
-          <Outlet />
+          {children}
         </div>
       </main>
     </div>

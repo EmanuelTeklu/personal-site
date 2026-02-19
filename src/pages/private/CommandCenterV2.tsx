@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "next/navigation";
 import {
   ArrowRight,
   ChevronRight,
@@ -665,7 +667,7 @@ function SettingsView() {
 
 /* ── Main Component ─────────────────────────────────────── */
 export function CommandCenterV2() {
-  const [searchParams] = useSearchParams();
+  const searchParams = useSearchParams();
   const view = normalizeView(searchParams.get("view"));
   const [launchModalOpen, setLaunchModalOpen] = useState(false);
 

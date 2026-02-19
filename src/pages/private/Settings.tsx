@@ -48,13 +48,13 @@ export function Settings() {
           <div className="flex items-center justify-between">
             <span className="text-zinc-400">API URL</span>
             <span className="text-zinc-300 font-mono text-xs">
-              {import.meta.env.VITE_API_URL ?? "http://localhost:8000"}
+              {process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"}
             </span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-zinc-400">Supabase</span>
             <span className="text-zinc-300 font-mono text-xs">
-              {import.meta.env.VITE_SUPABASE_URL ? "Configured" : "Not configured"}
+              {process.env.NEXT_PUBLIC_SUPABASE_URL ? "Configured" : "Not configured"}
             </span>
           </div>
         </div>
@@ -67,7 +67,7 @@ export function Settings() {
           Personal OS — emanuelteklu.com
         </p>
         <p className="text-xs text-zinc-600">
-          React 19 + TypeScript + Vite 7 + Tailwind v4 + FastAPI
+          React 19 + TypeScript + Next.js + Tailwind v4 + FastAPI
         </p>
       </div>
     </div>

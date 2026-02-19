@@ -1,5 +1,8 @@
+"use client";
+
 import type { ComponentType } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import {
   BarChart3,
   Bell,
@@ -38,11 +41,6 @@ const SYSTEM_ITEMS: readonly NavItem[] = [
   { href: "/cc?view=docs", view: "docs", label: "Documentation", icon: BookOpen },
 ];
 
-function activeView(search: string): string {
-  const params = new URLSearchParams(search);
-  return params.get("view") ?? "dashboard";
-}
-
 function SidebarLink({
   item,
   isActive,
@@ -52,7 +50,7 @@ function SidebarLink({
 }) {
   return (
     <Link
-      to={item.href}
+      href={item.href}
       className={`flex items-center gap-3 rounded-[4px] px-3 py-2 text-[14px] transition-colors ${
         isActive
           ? "border-l-[3px] border-[var(--hive-green-mid)] bg-[var(--hive-accent-dim)] pl-[9px] text-[var(--hive-fg-strong)]"
@@ -79,14 +77,15 @@ function SidebarLink({
 
 export function PrivateSidebar() {
   const { signOut } = useAuth();
-  const location = useLocation();
-  const currentView = activeView(location.search);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentView = searchParams.get("view") ?? "dashboard";
 
   return (
     <aside className="flex h-screen w-[240px] shrink-0 flex-col border-r border-[var(--hive-sidebar-border)] bg-[var(--hive-sidebar-bg)]">
       {/* Logo / workspace */}
       <div className="border-b border-[var(--hive-sidebar-border)] px-5 py-5">
-        <Link to="/" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <span className="flex h-8 w-8 items-center justify-center rounded-[4px] bg-[var(--hive-green-deep)] text-white">
             <Sparkles size={14} />
           </span>
@@ -133,7 +132,7 @@ export function PrivateSidebar() {
             <SidebarLink
               key={item.view}
               item={item}
-              isActive={location.pathname === "/cc" && currentView === item.view}
+              isActive={pathname === "/cc" && currentView === item.view}
             />
           ))}
         </div>
@@ -146,7 +145,7 @@ export function PrivateSidebar() {
             <SidebarLink
               key={item.view}
               item={item}
-              isActive={location.pathname === "/cc" && currentView === item.view}
+              isActive={pathname === "/cc" && currentView === item.view}
             />
           ))}
         </div>

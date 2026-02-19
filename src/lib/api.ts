@@ -9,10 +9,10 @@
 
 import { supabase } from "./supabase";
 
-const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 /** True when deployed to Vercel (no local sidecar available). */
-export const IS_PRODUCTION = import.meta.env.PROD && !import.meta.env.VITE_API_URL;
+export const IS_PRODUCTION = process.env.NODE_ENV === "production" && !process.env.NEXT_PUBLIC_API_URL;
 
 async function getAuthHeader(): Promise<Record<string, string>> {
   if (!supabase) return {};
