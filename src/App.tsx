@@ -9,6 +9,7 @@ import { Movies } from "@/pages/public/Movies";
 import { Writing } from "@/pages/public/Writing";
 import { Links } from "@/pages/public/Links";
 import { About } from "@/pages/public/About";
+import { Stream } from "@/pages/public/Stream";
 import { Login } from "@/pages/Login";
 import { CommandCenter } from "@/pages/private/CommandCenter";
 import { MetaAnalysis } from "@/pages/private/MetaAnalysis";
@@ -16,7 +17,7 @@ import { Tokens } from "@/pages/private/Tokens";
 import { Overnight } from "@/pages/private/Overnight";
 import { Research } from "@/pages/private/Research";
 import { AICommand } from "@/pages/private/AICommand";
-import { Placeholder } from "@/pages/private/Placeholder";
+import { Settings } from "@/pages/private/Settings";
 import { NotFound } from "@/pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -42,6 +43,7 @@ export function App() {
             <Route path="/writing" element={<Writing />} />
             <Route path="/links" element={<Links />} />
             <Route path="/about" element={<About />} />
+            <Route path="/stream" element={<Stream />} />
           </Route>
 
           {/* Login (standalone — no layout) */}
@@ -61,15 +63,7 @@ export function App() {
             <Route path="/overnight" element={<Overnight />} />
             <Route path="/research" element={<Research />} />
             <Route path="/ai" element={<AICommand />} />
-            <Route
-              path="/settings"
-              element={
-                <Placeholder
-                  title="Settings"
-                  description="Preferences, theme, and configuration."
-                />
-              }
-            />
+            <Route path="/settings" element={<Settings />} />
           </Route>
 
           {/* Catch-all */}
