@@ -1,0 +1,24 @@
+workflow: polish_release
+version: 1
+description: Final polish, regression checks, preview deploy, and production gate.
+steps:
+  - id: polish
+    agent: builder
+    action: implement_cluster
+    cluster: polish-pass
+
+  - id: critic-final
+    agent: critic
+    action: final_check
+
+  - id: preview
+    agent: builder
+    action: deploy_preview
+
+  - id: production-gate
+    agent: human
+    action: approve_production
+
+  - id: archive
+    agent: architect
+    action: update_hive

@@ -1,0 +1,99 @@
+workflow: fix_cc_full
+version: 1
+description: Full Command Center pass with Slack winner gate and critic enforcement.
+defaults:
+  variants: 3
+  gate: slack
+  retry_policy: blocked_steps_only
+steps:
+  - id: baseline
+    agent: architect
+    action: baseline_analysis
+    output: constraint-pack.json
+
+  - id: analyze-layout
+    agent: builder
+    action: analyze_current_layout
+    target: src/pages/private/CommandCenterV2.tsx
+
+  - id: research
+    agent: builder
+    action: research_references
+    refs: [linear, stripe, vercel]
+
+  - id: variants
+    agent: builder
+    action: generate_variants
+    count: 3
+    scope: cc-layout
+    output: variants/index.json
+
+  - id: review-variants
+    agent: critic
+    action: review_variants
+    input: variants/index.json
+    output: critic/audit.json
+
+  - id: human-select
+    agent: human
+    action: select
+    interface: slack
+
+  - id: implement-layout
+    agent: builder
+    action: implement
+    target: src/pages/private/CommandCenterV2.tsx
+
+  - id: cluster-a
+    agent: builder
+    action: implement_cluster
+    cluster: stats-and-nav
+    targets:
+      - src/components/private/hive/HiveStatsRow.tsx
+      - src/components/private/hive/HiveTabNav.tsx
+
+  - id: cluster-b
+    agent: builder
+    action: implement_cluster
+    cluster: campaigns
+    targets:
+      - src/components/private/hive/HiveCampaignCard.tsx
+      - src/components/private/hive/HiveCampaignList.tsx
+
+  - id: cluster-c
+    agent: builder
+    action: implement_cluster
+    cluster: activity-and-tree
+    targets:
+      - src/components/private/hive/HiveActivityFeed.tsx
+      - src/components/private/hive/HiveAgentTree.tsx
+
+  - id: data-integration
+    agent: builder
+    action: integrate_types_data
+    targets:
+      - src/types/hive.ts
+      - src/data/hive.ts
+      - src/index.css
+
+  - id: cluster-audit
+    agent: critic
+    action: audit_clusters
+    output: critic/audit.json
+
+  - id: final-gate
+    agent: critic
+    action: final_check
+    output: critic/audit.json
+
+  - id: preview
+    agent: builder
+    action: deploy_preview
+
+  - id: human-approve-prod
+    agent: human
+    action: approve_production
+
+  - id: update-memory
+    agent: architect
+    action: update_hive

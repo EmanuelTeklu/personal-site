@@ -1,0 +1,36 @@
+workflow: component_iterate
+version: 1
+description: Iterate one CC subcomponent with variants, critic review, and winner implementation.
+defaults:
+  variants: 3
+  gate: slack
+steps:
+  - id: baseline
+    agent: architect
+    action: baseline_analysis
+
+  - id: generate
+    agent: builder
+    action: generate_variants
+    count: 3
+
+  - id: review
+    agent: critic
+    action: review_variants
+
+  - id: select
+    agent: human
+    action: select
+    interface: slack
+
+  - id: implement
+    agent: builder
+    action: implement
+
+  - id: validate
+    agent: critic
+    action: final_check
+
+  - id: update-memory
+    agent: architect
+    action: update_hive
