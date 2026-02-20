@@ -9,7 +9,7 @@
 
 import { supabase } from "./supabase";
 
-const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+const API_BASE = import.meta.env.VITE_API_URL ?? (import.meta.env.PROD ? "" : "http://localhost:8000");
 
 /** True when deployed to Vercel (no local sidecar available). */
 export const IS_PRODUCTION = import.meta.env.PROD && !import.meta.env.VITE_API_URL;
@@ -23,10 +23,6 @@ async function getAuthHeader(): Promise<Record<string, string>> {
 }
 
 export async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
-  if (IS_PRODUCTION) {
-    throw new Error("Local API — connect from localhost to use this feature.");
-  }
-
   const auth = await getAuthHeader();
   const res = await fetch(`${API_BASE}${path}`, {
     ...options,
