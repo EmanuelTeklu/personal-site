@@ -119,3 +119,39 @@ a:hover {
 .page-content {
   animation: fadeIn 0.4s ease forwards;
 }
+
+.janehive-console,
+.janehive-review {
+  --cc-bg: #0d1a0d;
+  --cc-panel: #1a2e1a;
+  --cc-panel-border: #244024;
+  --cc-running-border: #2a4a2a;
+  --cc-input: #0d1a0d;
+  --cc-action: #2a4a2a;
+  --cc-action-hover: #3a5a3a;
+  --cc-fg: #f5f5dc;
+  --cc-muted: #8b9b7a;
+  font-family: "DM Sans", "Inter", system-ui, sans-serif;
+}
+
+.janehive-console input,
+.janehive-console textarea,
+.janehive-console select,
+.janehive-review input,
+.janehive-review textarea,
+.janehive-review select {
+  color: var(--cc-fg);
+}
+
+.janehive-console input::placeholder,
+.janehive-console textarea::placeholder,
+.janehive-review input::placeholder,
+.janehive-review textarea::placeholder {
+  color: var(--cc-muted);
+  opacity: 0.8;
+}
+
+.janehive-console input[type="range"],
+.janehive-review input[type="range"] {
+  accent-color: #3a5a3a;
+}

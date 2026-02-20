@@ -3,6 +3,7 @@ export const PUBLIC_NAV_ITEMS = [
   { label: "writing", path: "/writing" },
   { label: "links", path: "/links" },
   { label: "stream", path: "/stream" },
+  { label: "taste", path: "/taste" },
   { label: "about", path: "/about" },
 ] as const;
 

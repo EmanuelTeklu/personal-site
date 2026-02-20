@@ -1,0 +1,4 @@
+project_id = "emanuelteklu"
+
+[functions.run-campaign]
+verify_jwt = true

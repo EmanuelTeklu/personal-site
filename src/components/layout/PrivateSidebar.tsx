@@ -2,41 +2,69 @@ import type { ComponentType } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Clock,
-  FolderKanban,
   LayoutDashboard,
   ListChecks,
   LogOut,
   Palette,
-  Rocket,
   Settings,
   Sparkles,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
-const NAV_ITEMS = [
-  { href: "/cc", view: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/cc?view=taste-engine", view: "taste-engine", label: "Insights", icon: Palette },
-  { href: "/cc?view=projects", view: "projects", label: "Projects", icon: FolderKanban },
-  { href: "/cc?view=production", view: "production", label: "Runs", icon: Rocket },
-  { href: "/cc?view=history", view: "history", label: "History", icon: Clock },
-] as const;
-
-const FOOTER_ITEMS = [
-  { href: "/cc?view=settings", view: "settings", label: "Settings", icon: Settings },
-  { href: "/cc?view=tasks", view: "tasks", label: "Tasks", icon: ListChecks },
-] as const;
-
-function activeView(search: string): string {
-  const params = new URLSearchParams(search);
-  return params.get("view") ?? "dashboard";
-}
-
 interface SidebarItem {
   readonly href: string;
-  readonly view: string;
   readonly label: string;
   readonly icon: ComponentType<{ size?: number; className?: string }>;
+  readonly isActive: (pathname: string, search: string) => boolean;
 }
+
+const NAV_ITEMS: readonly SidebarItem[] = [
+  {
+    href: "/cc",
+    label: "Console",
+    icon: LayoutDashboard,
+    isActive: (pathname) => pathname === "/cc" || pathname.startsWith("/cc/campaigns/"),
+  },
+  {
+    href: "/cc/v2",
+    label: "Legacy V2",
+    icon: Palette,
+    isActive: (pathname) => pathname === "/cc/v2",
+  },
+  {
+    href: "/overnight",
+    label: "Overnight",
+    icon: Clock,
+    isActive: (pathname) => pathname === "/overnight",
+  },
+  {
+    href: "/research",
+    label: "Research",
+    icon: ListChecks,
+    isActive: (pathname) => pathname === "/research",
+  },
+  {
+    href: "/ai",
+    label: "AI Command",
+    icon: Sparkles,
+    isActive: (pathname) => pathname === "/ai",
+  },
+];
+
+const FOOTER_ITEMS: readonly SidebarItem[] = [
+  {
+    href: "/settings",
+    label: "Settings",
+    icon: Settings,
+    isActive: (pathname) => pathname === "/settings",
+  },
+  {
+    href: "/tokens",
+    label: "Tokens",
+    icon: ListChecks,
+    isActive: (pathname) => pathname === "/tokens",
+  },
+];
 
 function SidebarLink({ item, isActive }: { readonly item: SidebarItem; readonly isActive: boolean }) {
   return (
@@ -57,7 +85,6 @@ function SidebarLink({ item, isActive }: { readonly item: SidebarItem; readonly 
 export function PrivateSidebar() {
   const { signOut } = useAuth();
   const location = useLocation();
-  const currentView = activeView(location.search);
 
   return (
     <aside className="flex h-screen w-64 shrink-0 flex-col border-r border-[var(--hive-sidebar-border)] bg-[var(--hive-sidebar-bg)]">
@@ -78,7 +105,11 @@ export function PrivateSidebar() {
       <nav className="flex-1 overflow-y-auto px-3 py-4">
         <div className="space-y-1">
           {NAV_ITEMS.map((item) => (
-            <SidebarLink key={item.href} item={item} isActive={location.pathname === "/cc" && currentView === item.view} />
+            <SidebarLink
+              key={item.href}
+              item={item}
+              isActive={item.isActive(location.pathname, location.search)}
+            />
           ))}
         </div>
       </nav>
@@ -86,7 +117,11 @@ export function PrivateSidebar() {
       <div className="space-y-3 border-t border-[var(--hive-sidebar-border)] px-3 py-4">
         <div className="space-y-1">
           {FOOTER_ITEMS.map((item) => (
-            <SidebarLink key={item.href} item={item} isActive={location.pathname === "/cc" && currentView === item.view} />
+            <SidebarLink
+              key={item.href}
+              item={item}
+              isActive={item.isActive(location.pathname, location.search)}
+            />
           ))}
         </div>
 

@@ -33,3 +33,6 @@ __pycache__/
 
 # Aesthetic agent working directory
 .aesthetic/
+.agent/
+.hive/
+supabase/.temp/

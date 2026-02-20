@@ -10,9 +10,12 @@ import { Writing } from "@/pages/public/Writing";
 import { Links } from "@/pages/public/Links";
 import { About } from "@/pages/public/About";
 import { Stream } from "@/pages/public/Stream";
+import { TasteTuner } from "@/pages/public/TasteTuner";
 import { Login } from "@/pages/Login";
 import { CommandCenter } from "@/pages/private/CommandCenter";
 import { CommandCenterV2 } from "@/pages/private/CommandCenterV2";
+import { CommandConsole } from "@/pages/private/CommandConsole";
+import { CampaignReview } from "@/pages/private/CampaignReview";
 import { MetaAnalysis } from "@/pages/private/MetaAnalysis";
 import { Tokens } from "@/pages/private/Tokens";
 import { Overnight } from "@/pages/private/Overnight";
@@ -45,6 +48,7 @@ export function App() {
             <Route path="/links" element={<Links />} />
             <Route path="/about" element={<About />} />
             <Route path="/stream" element={<Stream />} />
+            <Route path="/taste" element={<TasteTuner />} />
           </Route>
 
           {/* Login (standalone — no layout) */}
@@ -58,7 +62,9 @@ export function App() {
               </AuthGate>
             }
           >
-            <Route path="/cc" element={<CommandCenterV2 />} />
+            <Route path="/cc/campaigns/:campaignId" element={<CampaignReview />} />
+            <Route path="/cc" element={<CommandConsole />} />
+            <Route path="/cc/v2" element={<CommandCenterV2 />} />
             <Route path="/cc/legacy" element={<CommandCenter />} />
             <Route path="/cc/meta" element={<MetaAnalysis />} />
             <Route path="/tokens" element={<Tokens />} />
